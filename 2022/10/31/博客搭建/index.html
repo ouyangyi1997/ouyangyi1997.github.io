@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Yi Ouyang">
+
+
+
+    <meta name="description" content="Learning">
+
+
+
+<title>个人博客搭建 | Hexo</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Ouyang Yi&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">Contact</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Ouyang Yi&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">Contact</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">个人博客搭建</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Yi Ouyang</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">October 31, 2022&nbsp;&nbsp;0:00:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="个人博客搭建教程"><a href="#个人博客搭建教程" class="headerlink" title="个人博客搭建教程"></a>个人博客搭建教程</h1><h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>心血来潮，想搭建一个blog充当个人网站用来记录一下平时学习过程中的笔记，分享一些学习的经验。这篇Blog就是记录分享一下我在学习博客搭建的笔记。<br>说干就干，在B站找了各种教程，绝大多数up主推荐的就是使用Hexo与Github的组合。该组合完全免费，操作较为简单，bolg更新速度快等优点，关于这种方法的视频非常多，于是就选择这种方法。当然除了hexo+github的组合外，现在Rstudio还出了一个Quarto，Quarto也是可以直接搭建个人博客的，最近比较流行。 </p>
+<p>Hexo+github的视频教程在B站上很多，我个人是根据以下三个视频结合使用的：①. <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty/?spm_id_from=333.337.search-card.all.click&vd_source=8afbeba174fa8213490e923e527fdb14">Codesheep</a>；②. <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tK411p7Bx/?spm_id_from=333.999.0.0&vd_source=8afbeba174fa8213490e923e527fdb14">小书童</a>；③. <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1at4y1D7rr/?spm_id_from=333.337.search-card.all.click&vd_source=8afbeba174fa8213490e923e527fdb14">zxfans</a>。<br>简单说一下3个视频的区别：</p>
+<ul>
+<li>前面2个视频都是在Mac系统下操作的，最后一个是在Window系统的教程，根据不同的系统选择不同的视频教程即可。</li>
+<li>第二个视频其实使用的hexo与VPS的组合。VPS具体是什么，我不太了解。我个人认为VPS就是与Github一样，是一个服务器</li>
+</ul>
+<h2 id="二、操作步骤"><a href="#二、操作步骤" class="headerlink" title="二、操作步骤"></a>二、操作步骤</h2><p>整个搭建流程分为以下7个步骤：</p>
+<ol>
+<li>下载安装hexo</li>
+<li>创建Blog文件夹</li>
+<li>初始化博客、启动博客(本地博客)</li>
+<li>Github创建仓库</li>
+<li>在本地部署Git全局</li>
+<li>将博客部署到Github仓库</li>
+<li>修改主题</li>
+</ol>
+<h3 id="1-下载安装hexo"><a href="#1-下载安装hexo" class="headerlink" title="1. 下载安装hexo"></a>1. 下载安装hexo</h3><ul>
+<li><p>安装node.js，Hexo是基于node的，所以首先下载node.js。直接在官网下载<a target="_blank" rel="noopener" href="https://nodejs.org/en/">node.js</a>然后安装。</p>
+</li>
+<li><p>安装完成后使用<code>node -v</code>命令来检查是否安装成功。</p>
+</li>
+<li><p>使用npm下载安装hexo，<code>npm install -g hexo-cli #安装hexo框架</code>，如果下载不下来可以安装cnpm。</p>
+<ul>
+<li><code>npm install -g cnpm --registry=http://registry.npm.taobao.org</code>安装完成后使用 <code>cnpm -v	#查看cnpm版本</code> 检查cnpm是否成功安装。</li>
+<li>最后使用cnpm安装hexo框架 <code>cnpm install -g hexo-cli    #安装hexo框架</code></li>
+</ul>
+</li>
+<li><p>安装完成后使用 <code>hexo -c #查看hexo版本</code> 检查hexo是否成功安装。</p>
+</li>
+</ul>
+<h3 id="2-创建Blog文件夹"><a href="#2-创建Blog文件夹" class="headerlink" title="2. 创建Blog文件夹"></a>2. 创建Blog文件夹</h3><ul>
+<li>自定义一个位置创建一个用于存在hexo构建blog的文件夹<code>mkdir blog</code>。</li>
+<li>进入创建好的blog文件夹中，进行hexo初始化步骤。</li>
+</ul>
+<h3 id="3-初始化博客、启动博客-本地博客"><a href="#3-初始化博客、启动博客-本地博客" class="headerlink" title="3. 初始化博客、启动博客(本地博客)"></a>3. 初始化博客、启动博客(本地博客)</h3><ul>
+<li><p><code>hexo init #初始化博客</code>，当初始化完成后blog文件夹中会生成以下文件：<img src="/assets/image-20221031190735745.png" alt="image-20221031190735745-c400"></p>
+</li>
+<li><p>可是使用<code>hexo -s</code>命令生成一个本地博客，如下：<img src="/assets/image-20221031190932189.png" alt="image-20221031190932189-c400"></p>
+</li>
+<li><p>在浏览器中打开<a target="_blank" rel="noopener" href="http://localhost:4000/%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E8%A7%81%E9%BB%98%E8%AE%A4%E7%9A%84%E4%B8%80%E4%B8%AAHello">http://localhost:4000/，就可以看见默认的一个Hello</a> world的初始博客。</p>
+</li>
+<li><p>至此，hexo可以成功的安装并生成本地博客。</p>
+</li>
+</ul>
+<h3 id="4-Github创建仓库"><a href="#4-Github创建仓库" class="headerlink" title="4. Github创建仓库"></a>4. Github创建仓库</h3><ul>
+<li><p>注册Github账号。</p>
+</li>
+<li><p>成功注册Github账号后，创建一个仓库用于存储heox创建的博客内容。<img src="/assets/image-20221031191431437.png" alt="image-20221031191431437-c400"></p>
+</li>
+<li><p>创建仓库，仓库名字的格式一定要写对：YourGithubName**.github.io**。后面的github.io是统一的，前面填写注册时所使用的用户名。<img src="/assets/image-20221031191728361.png" alt="image-20221031191728361-c400"></p>
+</li>
+</ul>
+<h3 id="5-本地部署Git全局"><a href="#5-本地部署Git全局" class="headerlink" title="5. 本地部署Git全局"></a>5. 本地部署Git全局</h3><ul>
+<li>第3个视频教程说了如何在本地构建Git全局。</li>
+<li>图文教程<a target="_blank" rel="noopener" href="https://chinese.freecodecamp.org/news/how-to-get-and-configure-git-and-github-ssh-keys/">SSHkey</a></li>
+<li>首先使用<code>git config --global user.name &quot; &quot;</code>注册github时所使用的用户名。</li>
+<li>再输入<code>git config --global user.email&quot;&quot; </code> 注册github时所使用的邮箱。</li>
+<li>以上两步完成后，生成sshkey，<code>ssh-keygen -t rsa -C &quot;注册github的邮箱 &quot;</code>。</li>
+<li>完成上一步后使用<code>cat ~/.ssh/id_rsa.pub</code>获得sshkey。</li>
+<li>而后在github seeting中输入刚才获得的sshkey。<img src="/assets/image-20221031193148496.png" alt="image-20221031193148496-c400"></li>
+</ul>
+<h3 id="6-将博客部署到Github"><a href="#6-将博客部署到Github" class="headerlink" title="6. 将博客部署到Github"></a>6. 将博客部署到Github</h3><ul>
+<li><p>首先安装一个部署插件<code>cnpm install --save hexo-deployer-git #在blog目录下安装git部署插件</code>。</p>
+</li>
+<li><p>安装完成后，需要配置一下_config.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">	<span class="built_in">type</span>: git </span><br><span class="line">	repo: https://github.com/YourGithubName/YourGithubName.github.io.git</span><br><span class="line">	branch: master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置完成后输入<code>hexo g -d</code>，将博客部署到Github。</p>
+</li>
+<li><p>该网址可查看生成的blog <a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a></p>
+</li>
+</ul>
+<h3 id="7-修改博客主题"><a href="#7-修改博客主题" class="headerlink" title="7. 修改博客主题"></a>7. 修改博客主题</h3><ul>
+<li>在hexo.io网址下选择个人钟意的主题。</li>
+<li>下面以Chic主题为样例：<ul>
+<li>首先通过git 在主题制作者的github中clone主题文件。</li>
+<li>cd到blog文件夹下的theme文件夹中，然后输入<code>git clone https://github.com/Siricee/hexo-theme-Chic.git Chic</code></li>
+<li>下载完成后在theme文件夹中会出现Chic主题。</li>
+<li>最后还是在_config.yml文件中进行配置：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: Chic</span><br></pre></td></tr></table></figure></li>
+<li>最后<code>hexo g -d</code>重新配置。</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、Issues"><a href="#三、Issues" class="headerlink" title="三、Issues"></a>三、Issues</h2><p>下面将我在搭建过程中遇见的问题还有写这篇博客过程中遇见的一些问题做一个汇总：</p>
+<ul>
+<li>在整个搭建过程中，最容易出错的地方在于第6步将博客部署到github远端。出错的原因主要是之前没有在电脑本地进行github的全局部署。</li>
+<li>Github全局部署可以参考文章中的那篇图文教程，总体而言还是很简单的，具体的视频教程可以自行在B站搜索一番。</li>
+<li>个人非常注重实用体验，尤其是电脑软件的使用体验，特别是<strong>笔记软件</strong>🤣，在使用Markdown语法在写这篇博客的时候我来回换了3种软件：①. Mweb Pro，②. Typora，③. VScode。总体而言流畅度最高的还是<strong>VScode</strong>👍🏻，非常流程丝滑，非常棒。但是在插入图片的时候就麻烦了很多，很不方便。插入图片最好的还是Mweb Pro，但是流程度很糟糕，不知道是什么原因前段时间使用的感觉还是非常好的。这两款软件都是传统的双栏，将源格式与预览页面分隔开。在之前我是很不喜欢这种双栏的呈现方式，钟意Typora那种所见即所得的方式，但是当我这次较为深度的使用之后，我改变了我的想法，双栏这种经典的还是好。Typora那种将格式符号隐藏，所见即所得的方式在输入行代码时不太方便，没有格式符号总是容易操作失误。</li>
+<li>使用MD书写博客，图片插入还是一个问题，使用图床的方式还没来得及仔细研究，需要在琢磨琢磨。</li>
+<li>使用hexo构建的博客在使用做好的主题时，需要个性化修改，这个在下次再写一篇关于这方面内容的记录。</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Yi Ouyang</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://ouyangyi1997.github.io/2022/10/31/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">https://ouyangyi1997.github.io/2022/10/31/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</a></span>
+                    </p>
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Hexo-Blog/"># Hexo, Blog</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/10/31/hello-world/">Hello World</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Yi Ouyang | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
